@@ -1,0 +1,317 @@
+Psychology & Human Behavior
+Baader–Meinhof Phenomenon — why something seems to appear everywhere after you learn about it
+Dunning–Kruger Effect
+Bystander Effect
+Zeigarnik Effect — why unfinished tasks stick in your mind
+Spotlight Effect — overestimating how much people notice you
+False Memory
+Cryptomnesia — accidentally remembering someone else's idea as your own
+Tip-of-the-Tongue Phenomenon
+Mere Exposure Effect
+Halo Effect
+Fundamental Attribution Error
+Barnum Effect — why vague personality descriptions feel strangely accurate
+Choice Overload
+Paradox of Choice
+IKEA Effect — why we value things more after making them
+Endowment Effect
+Sunk Cost Fallacy
+Negativity Bias
+Optimism Bias
+Recency Effect
+Serial Position Effect
+Cocktail Party Effect — how your brain picks your name out of background noise
+Rubber Hand Illusion
+Change Blindness
+Inattentional Blindness
+Phantom Vibration Syndrome
+Placebo Effect
+Nocebo Effect
+Social Loafing
+Observer Effect
+Pygmalion Effect
+Impostor Phenomenon
+Learned Helplessness
+Flow State
+Déjà vu
+Jamais vu — experiencing something familiar as completely unfamiliar
+Pareidolia — seeing meaningful patterns in random things
+Anhedonia
+Time Perception — why time seems to speed up as we get older
+The Uncanny Valley
+🔬 Weird Science
+The Mpemba Effect — under some conditions, hot water can freeze faster than cold water
+Quantum Zeno Effect
+Schrödinger's Cat
+Quantum Entanglement
+Wave–Particle Duality
+Delayed-Choice Experiments
+Quantum Tunneling
+The Double-Slit Experiment
+Time Dilation
+Gravitational Time Dilation
+The Arrow of Time
+Entropy and the “direction” of time
+The Fermi Paradox
+The Great Filter
+Dyson Spheres
+Oumuamua — the mysterious interstellar object
+Rogue Planets
+Neutron Stars
+Magnetars
+Fast Radio Bursts
+Dark Matter
+Dark Energy
+Cosmic Inflation
+The Heat Death of the Universe
+False Vacuum
+Boltzmann Brains
+The Simulation Hypothesis
+The Many-Worlds Interpretation
+The Anthropogenic Principle
+The Twin Paradox
+Time Crystals
+Antimatter
+Hawking Radiation
+The Information Paradox
+Black Hole Spaghettification
+Gravitational Waves
+Cosmic Microwave Background
+The Missing Baryon Problem
+The Horizon Problem
+The Olbers' Paradox — why isn't the night sky completely bright?
+🌍 Strange Things Happening on Earth
+Ball Lightning
+Sailing Stones of Death Valley
+Catatumbo Lightning
+Brinicles — underwater “ice fingers”
+Blood Falls in Antarctica
+Bioluminescent Beaches
+Underwater Lakes
+Underwater Rivers
+The Crooked Forest
+Fairy Circles
+Moving Rocks
+Ice Spikes
+Frost Flowers
+Snow Rollers
+Fire Whirlwinds
+Morning Glory Clouds
+Lenticular Clouds
+Gravity Hills
+The Door to Hell — Darvaza Gas Crater
+Eternal Flames
+Singing Sand Dunes
+Exploding Lakes
+Lake Nyos and Limnic Eruptions
+Methane Bubbles Under Ice
+Earth's Singing / Seismic Hum
+Rogue Waves
+Ocean Brine Pools
+Underwater Volcanoes
+Supercritical Water
+The Deep Biosphere
+Life Around Hydrothermal Vents
+🧬 Human Body
+Why Your Brain Can't Feel Pain
+Why You Get Brain Freeze
+Why Fingers Wrinkle in Water
+Why We Yawn
+Why We Sneeze
+Why We Get Hiccups
+Why Your Voice Sounds Different in a Recording
+Why Smells Trigger Memories
+Why You Can't Tickle Yourself
+Why Your Stomach Doesn't Digest Itself
+Why Your Eyes Have a Blind Spot
+Why You Don't See Your Own Nose
+Why You Wake Up Before Your Alarm
+Why Music Gives You Goosebumps
+Why Humans Have Different Blood Types
+Why Some People Can Taste Certain Chemicals
+Super Recognizers
+Synesthesia
+Savant Syndrome
+The Placebo Surgery Effect
+Phantom Limb Syndrome
+Alien Hand Syndrome
+Exploding Head Syndrome
+Cotard Delusion
+Capgras Delusion
+Foreign Accent Syndrome
+Fatal Familial Insomnia
+The Human Echolocation Phenomenon
+🏛️ History's Weirdest Stories
+The Dancing Plague of 1518
+The Great Molasses Flood
+The London Beer Flood
+The War of the Bucket
+The Pig War
+The Cod Wars
+The Great Emu War
+The Defenestrations of Prague
+The Year Without a Summer
+The Great Stink of London
+The Cadaver Synod
+The Man Who Survived Two Atomic Bombings
+The Lost Colony of Roanoke
+The Voynich Manuscript
+The Antikythera Mechanism
+The Baghdad Battery
+The Dancing Mania of the Middle Ages
+The Taos Hum
+The Philadelphia Experiment — separating documented history from the legend
+The Tunguska Event
+The Great Blue Hole
+The Mary Celeste
+The Dyatlov Pass Incident
+The Sodder Children Mystery
+The Max Headroom Incident
+The Wow! Signal
+The Tamám Shud Mystery
+The Somerton Man
+The Lead Masks Case
+The Isdal Woman
+💻 Technology & Internet
+Why CAPTCHA Tests Humans
+How Recommendation Algorithms Learn Your Preferences
+Why Your Phone Knows Where You've Been
+How GPS Actually Knows Your Location
+How QR Codes Still Work When Partially Damaged
+How Error-Correcting Codes Work
+Why Computers Use Binary
+Why JPEG Images Have Artifacts
+How Compression Removes Information
+Why 0.1 + 0.2 ≠ 0.3 in Some Programming Languages
+The Y2K Bug
+The Millennium Bug That Almost Wasn't
+How Internet Routing Works
+Why the Internet Doesn't Have One Central Computer
+What Actually Happens When You Type a URL
+How DNS Works
+How a Password Becomes a Hash
+Why Hash Functions Are One-Way
+How Public-Key Cryptography Works
+How Blockchain Actually Prevents Double Spending
+Why GPS Needs Relativity
+How Satellites Stay in Orbit
+How Noise Cancellation Works
+How Image Recognition Works
+How Facial Recognition Works
+How Deepfakes Work
+Why AI Hallucinates
+How Large Language Models Predict Text
+Why Random Numbers on Computers Aren't Truly Random
+The Internet's Undersea Cables
+🧩 Philosophy & Thought Experiments
+Ship of Theseus
+Brain in a Vat
+Chinese Room
+Trolley Problem
+Prisoner's Dilemma
+Experience Machine
+The Grandfather Paradox
+The Bootstrap Paradox
+The Teleporter Paradox
+Newcomb's Paradox
+The Sleeping Beauty Problem
+The Unexpected Hanging Paradox
+The Barber Paradox
+Russell's Paradox
+Zeno's Paradoxes
+Sorites Paradox
+The Monty Hall Problem
+The Birthday Paradox
+The Infinite Monkey Theorem
+The Veil of Ignorance
+The Problem of Other Minds
+The Problem of Induction
+Occam's Razor
+The Simulation Argument
+🐙 Animals & Nature
+Why Octopuses Have Three Hearts
+Why Octopus Blood Is Blue
+How Tardigrades Survive Extreme Conditions
+Zombie Ants
+Plants That Eat Animals
+Plants That Communicate
+Trees Sharing Resources Through Fungi
+Mycorrhizal Networks
+The Immortal Jellyfish
+Animals That Can Regenerate Organs
+Axolotl Regeneration
+Crows Remembering Human Faces
+Crows Using Tools
+Dolphins Calling Each Other by “Names”
+Elephant Mourning
+The Self-Recognizing Mirror Test
+Animal Magnetoreception
+How Birds Navigate Using Earth's Magnetic Field
+How Whales Communicate Across Oceans
+The Great Pacific Garbage Patch
+Animal Hibernation
+Ant Supercolonies
+Slime Mold Intelligence
+Fungal Networks
+Mimicry in Animals
+Batesian Mimicry
+Mullerian Mimicry
+Evolutionary Arms Races
+Why Some Animals Have Transparent Blood
+Why Flamingos Are Pink
+🕵️ “Wait, That's Actually Real?” Topics
+The Man Who Lived Without Most of His Brain
+People Who Don't Have an Inner Monologue
+People Who Don't Visualize Images — Aphantasia
+People Who See Extra Colors — Tetrachromacy
+People Who Can Remember Almost Every Day of Their Lives
+People Who Can't Recognize Faces — Prosopagnosia
+People Who Can Smell Parkinson's Disease
+The Woman Who Could Taste Words
+People Who Don't Feel Fear
+People Who Can't Feel Pain
+People Who Can Function With Very Little Sleep
+The World's Quietest Room
+The World's Loneliest Whale
+The Place Where Two Oceans Meet — and Why the “Separate Oceans” Claim Is Misleading
+The Ocean's Twilight Zone
+The Deepest Point Humans Have Reached
+What Happens If You Fall Into a Black Hole
+What Would Happen If the Moon Disappeared?
+What Would Happen If Earth Stopped Rotating?
+What Would Happen If the Sun Suddenly Disappeared?
+Could You Survive in Space for a Few Seconds?
+Why You Can't Burp in Space
+Why Astronauts Get Taller in Space
+Why Space Smells Like Burnt Metal
+Why the Moon Is Slowly Moving Away From Earth
+Why Venus Has a Longer Day Than Year
+Why Uranus Rotates on Its Side
+Why Saturn Could Float in Water
+Why the Sun Doesn't Have a Solid Surface
+🎭 Culture & Everyday Life
+Why Different Cultures Have Different Concepts of Personal Space
+Why Almost Every Culture Has Some Form of Music
+Why Humans Developed Writing
+Why Some Languages Have No Word for Certain Colors
+Why Languages Keep Changing
+Why Accents Never Completely Disappear
+Why Some Languages Have No Grammatical Future Tense
+The Origin of “OK”
+Why We Shake Hands
+Why We Blow Out Birthday Candles
+Why We Say “Bless You” After Sneezing
+Why Wedding Rings Go on the Fourth Finger
+Why Black Is Associated With Mourning
+Why Humans Developed Different Writing Directions
+Why Some Countries Drive on the Left
+Why Time Zones Are So Weird
+Why Countries Have Different Weekends
+Why We Use 12 Months
+Why February Is So Short
+Why Leap Years Exist
+Why Some Countries Have Multiple Official Languages
+How Slang Spreads
+Why Accents Change Within the Same Country
+How New Words Enter a Language
+Why Some Words Become Taboo

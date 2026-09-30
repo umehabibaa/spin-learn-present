@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spin. Learn. Present.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:oklch(0.978 0.017 95);          /* cream */
+  --ink:oklch(0.30 0.055 145);         /* dark matcha */
+  --mute:oklch(0.45 0.038 142);        /* muted matcha */
+  --line:oklch(0.84 0.035 123);        /* soft matcha border */
+  --matcha:oklch(0.49 0.073 145);      /* classic matcha sage green */
+  --onmatcha:oklch(0.99 0.012 95);     /* cream on green */
+  --strawberry:oklch(0.68 0.105 9);    /* soft milk pink */
+  --strawberry-deep:oklch(0.47 0.10 10);/* deep strawberry */
+  --pink-soft:oklch(0.94 0.031 15);    /* soft pink surface */
+  --pink-mist:oklch(0.91 0.044 12);    /* pink accent */
+  --card:oklch(0.995 0.009 89);
+  --shadow:0 8px 26px -16px oklch(0.30 0.055 145 / 24%);
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    --bg:oklch(0.23 0.033 145);
+    --ink:oklch(0.94 0.023 92);
+    --mute:oklch(0.79 0.032 128);
+    --line:oklch(0.43 0.027 142);
+    --matcha:oklch(0.73 0.079 137);
+    --onmatcha:oklch(0.20 0.037 145);
+    --strawberry:oklch(0.78 0.09 13);
+    --strawberry-deep:oklch(0.88 0.07 12);
+    --pink-soft:oklch(0.35 0.035 15);
+    --pink-mist:oklch(0.39 0.060 10);
+    --card:oklch(0.28 0.028 144);
+    --shadow:0 8px 26px -16px oklch(0.05 0.01 145 / 60%);
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 "Bricolage Grotesque",system-ui,sans-serif}
+main{max-width:720px;margin:0 auto;padding:40px 20px 80px}
+h1{font-size:clamp(2rem,6vw,3.2rem);line-height:1.05;margin:0 0 8px;font-weight:800;letter-spacing:-.02em}
+p.sub{color:var(--mute);margin:0 0 28px;max-width:52ch}
+button,a.btn{font:inherit;font-weight:700;border:0;border-radius:8px;padding:14px 22px;cursor:pointer;text-decoration:none;display:inline-block;transition:background-color .2s ease,color .2s ease,box-shadow .2s ease}
+button{background:var(--strawberry);color:var(--onmatcha);box-shadow:var(--shadow)}
+button:hover{background:var(--strawberry-deep);color:var(--onmatcha)}
+@media(prefers-color-scheme:dark){button:hover{background:var(--strawberry-deep);color:var(--onmatcha)}}
+button.alt{background:transparent;color:var(--matcha);border:2px solid var(--matcha);box-shadow:none}
+button.alt:hover{background:var(--pink-soft)}
+button.rec{background:var(--matcha);color:var(--onmatcha);box-shadow:var(--shadow)}
+button.rec:hover{background:var(--matcha);opacity:.85}
+button:disabled{opacity:.4;cursor:default}
+button:focus-visible,a:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--strawberry);outline-offset:3px}
+.row{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+section{display:none}section.on{display:block}
+/* the reel: three visible rows, the middle row is the pick */
+.win{position:relative;height:216px;overflow:hidden;border-block:2px solid var(--matcha);margin:0 0 4px}
+.win::before{content:"";position:absolute;inset:72px 0;background:var(--pink-soft);border-block:3px solid var(--strawberry);z-index:0}
+.reel{position:relative;z-index:1;will-change:transform}
+.reel div{height:72px;display:flex;align-items:center;padding:0 16px;font-size:clamp(1.05rem,3.6vw,1.5rem);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--mute)}
+.reel div.pick{color:var(--ink)}
+.chip{display:inline-block;font-size:.85rem;color:var(--strawberry-deep);background:var(--pink-soft);border:1px solid var(--strawberry);border-radius:99px;padding:2px 12px;margin-bottom:10px}
+.clock{font-size:clamp(3.5rem,16vw,6.5rem);font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.03em;line-height:1}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:16px 18px;margin:18px 0}
+.card p{margin:0 0 8px;max-width:68ch}
+.card summary{cursor:pointer}
+.card a{color:var(--strawberry-deep);text-underline-offset:3px}
+textarea{width:100%;min-height:150px;font:inherit;padding:12px;border-radius:8px;border:2px solid var(--line);background:var(--card);color:var(--ink);resize:vertical;transition:border-color .2s ease}
+textarea::placeholder{color:var(--mute)}
+textarea:focus{border-color:var(--strawberry);outline:none}
+video{width:100%;border-radius:8px;background:var(--ink);transform:scaleX(-1)}
+.links{margin:0 0 8px}
+.links a{margin-right:16px;color:var(--matcha);text-underline-offset:3px}
+.links a:hover{color:var(--strawberry-deep)}
+.err{color:var(--strawberry-deep);font-weight:700}
+h2{margin:0 0 4px;font-size:clamp(1.5rem,5vw,2.2rem);line-height:1.15;font-weight:700}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}}
+</style></head><body><main>
+
+<section id="s-spin" class="on">
+  <h1>Spin. Learn. Present.</h1>
+  <p class="sub">Get a random topic. Spend 15 minutes learning it, then explain it to your camera for 5. The video never leaves your device.</p>
+  <div class="win" aria-live="polite"><div class="reel" id="reel"></div></div>
+  <div class="row"><button id="spin">Spin for a topic</button></div>
+</section>
+
+<section id="s-learn">
+  <span class="chip" id="l-cat"></span>
+  <h2 id="l-title"></h2>
+  <p class="sub" id="l-hint"></p>
+  <div class="row" style="margin-top:0"><button id="start">Start 15-minute timer</button><button class="alt" id="respin">Pick another</button></div>
+  <div id="l-run" hidden>
+    <div class="clock" id="l-clock">15:00</div>
+    <div class="card" id="l-wiki"><p>Loading starter reading…</p></div>
+    <div class="links" id="l-links"></div>
+    <p><strong>Your notes</strong></p>
+    <textarea id="notes" placeholder="Write what you learn. You can glance at these while presenting."></textarea>
+    <div class="row"><button id="to-present">I'm ready to present</button></div>
+  </div>
+</section>
+
+<section id="s-present">
+  <h2 id="p-title"></h2>
+  <p class="sub">Explain it like you're teaching a friend. Recording stops itself at 5:00.</p>
+  <video id="cam" autoplay muted playsinline></video>
+  <div class="clock" id="p-clock" style="margin-top:14px">5:00</div>
+  <p class="err" id="p-err"></p>
+  <div class="row">
+    <button id="cam-on">Open camera</button>
+    <button class="rec" id="rec" hidden>Start recording</button>
+    <button id="stop" hidden>Stop</button>
+  </div>
+  <details class="card"><summary>My notes</summary><pre id="notes-view" style="white-space:pre-wrap;font:inherit;margin:8px 0 0"></pre></details>
+</section>
+
+<section id="s-done">
+  <h2>Recording finished</h2>
+  <p class="sub">Save it to this device, or skip. Nothing is uploaded either way.</p>
+  <video id="playback" controls playsinline style="transform:none"></video>
+  <div class="row"><a class="btn" id="save" download style="background:var(--strawberry);color:var(--onmatcha)">Save to device</a><button class="alt" id="skip">Skip</button></div>
+</section>
+
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const FAST=new URLSearchParams(location.search).has("fast"); // ?fast=1 -> 10s timers for testing
+const LEARN=FAST?10:900, TALK=FAST?10:300, H=72;
+let topic=null, stream=null, rec=null, chunks=[], blobUrl=null;
+const show=id=>{document.querySelectorAll("section").forEach(s=>s.classList.toggle("on",s.id===id))};
+const fmt=s=>`${Math.floor(s/60)}:${String(s%60).padStart(2,"0")}`;
+const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+
+// ---- topics (all on-device; nothing is fetched from a server) ----
+const topics=[
+{id:"bioluminescence",title:"Bioluminescence",category:"Nature",hint:"How do living things make their own light?",wiki:"Bioluminescence"},
+{id:"the-butterfly-effect",title:"The butterfly effect",category:"Science",hint:"Can a tiny change really alter a much larger outcome?",wiki:"Butterfly_effect"},
+{id:"the-silk-road",title:"The Silk Road",category:"History",hint:"What traveled along these routes besides silk?",wiki:"Silk_Road"},
+{id:"octopus-intelligence",title:"Octopus intelligence",category:"Nature",hint:"How do octopuses solve problems?",wiki:"Cephalopod_intelligence"},
+{id:"the-northern-lights",title:"The northern lights",category:"Space",hint:"What makes the night sky glow?",wiki:"Aurora"},
+{id:"origami",title:"Origami",category:"Art",hint:"How can folding paper inspire engineering?",wiki:"Origami"},
+{id:"the-placebo-effect",title:"The placebo effect",category:"Mind",hint:"Can belief change how we feel?",wiki:"Placebo"},
+{id:"mycelium",title:"Mycelium",category:"Nature",hint:"What connects life beneath the forest floor?",wiki:"Mycelium"},
+{id:"the-james-webb-telescope",title:"The James Webb Space Telescope",category:"Space",hint:"How does it look back in time?",wiki:"James_Webb_Space_Telescope"},
+{id:"fermentation",title:"Fermentation",category:"Food",hint:"Why have people used microbes to make food for centuries?",wiki:"Fermentation"},
+{id:"the-antikythera-mechanism",title:"The Antikythera mechanism",category:"History",hint:"What could this ancient device calculate?",wiki:"Antikythera_mechanism"},
+{id:"tardigrades",title:"Tardigrades",category:"Nature",hint:"How do these tiny animals survive extremes?",wiki:"Tardigrade"},
+{id:"the-great-barrier-reef",title:"The Great Barrier Reef",category:"Nature",hint:"What makes a reef an ecosystem?",wiki:"Great_Barrier_Reef"},
+{id:"synesthesia",title:"Synesthesia",category:"Mind",hint:"What does it mean to taste a word or see a sound?",wiki:"Synesthesia"},
+{id:"the-printing-press",title:"The printing press",category:"History",hint:"How did printed books change who could share ideas?",wiki:"Printing_press"},
+{id:"black-holes",title:"Black holes",category:"Space",hint:"What happens when gravity becomes inescapable?",wiki:"Black_hole"},
+{id:"bees-and-pollination",title:"Bees and pollination",category:"Nature",hint:"How do bees help plants reproduce?",wiki:"Pollination"},
+{id:"the-fibonacci-sequence",title:"The Fibonacci sequence",category:"Math",hint:"Where do these numbers appear in nature?",wiki:"Fibonacci_sequence"},
+{id:"the-moon-landing",title:"The Moon landing",category:"History",hint:"What did it take to get people to the Moon?",wiki:"Apollo_11"},
+{id:"the-water-cycle",title:"The water cycle",category:"Earth",hint:"How does the same water move around our planet?",wiki:"Water_cycle"},
+{id:"the-deep-sea",title:"The deep sea",category:"Nature",hint:"What lives where sunlight cannot reach?",wiki:"Deep_sea"},
+{id:"memory",title:"How memory works",category:"Mind",hint:"Why do some moments stay with us?",wiki:"Memory"},
+{id:"volcanoes",title:"Volcanoes",category:"Earth",hint:"What is happening beneath an eruption?",wiki:"Volcano"},
+{id:"the-internet",title:"How the internet works",category:"Technology",hint:"How does a message reach another continent?",wiki:"Internet"},
+{id:"the-power-of-music",title:"Music and the brain",category:"Mind",hint:"Why does music move us?",wiki:"Music_and_the_brain"},
+{id:"the-migration-of-birds",title:"Bird migration",category:"Nature",hint:"How do birds navigate across the world?",wiki:"Bird_migration"},
+{id:"the-history-of-tea",title:"The history of tea",category:"Food",hint:"How did tea become a global ritual?",wiki:"History_of_tea"},
+{id:"the-tides",title:"Ocean tides",category:"Earth",hint:"How does the Moon move the ocean?",wiki:"Tide"},
+{id:"the-rossetta-stone",title:"The Rosetta Stone",category:"History",hint:"How did one stone unlock an ancient language?",wiki:"Rosetta_Stone"},
+{id:"solar-eclipses",title:"Solar eclipses",category:"Space",hint:"What happens when the Moon blocks the Sun?",wiki:"Solar_eclipse"},
+{id:"the-panda",title:"Giant pandas",category:"Nature",hint:"Why do these bears mostly eat bamboo?",wiki:"Giant_panda"},
+{id:"the-piano",title:"How a piano works",category:"Music",hint:"What happens when you press a key?",wiki:"Piano"},
+{id:"sleep",title:"Why we sleep",category:"Mind",hint:"What does the brain do while we rest?",wiki:"Sleep"},
+{id:"the-compass",title:"The compass",category:"History",hint:"How did a needle transform navigation?",wiki:"Compass"},
+{id:"clouds",title:"How clouds form",category:"Earth",hint:"Why does water gather in the sky?",wiki:"Cloud"},
+{id:"the-art-of-kintsugi",title:"Kintsugi",category:"Art",hint:"Why repair broken pottery with gold?",wiki:"Kintsugi"},
+{id:"the-dna-double-helix",title:"The DNA double helix",category:"Science",hint:"How does DNA carry information?",wiki:"DNA"},
+{id:"coral",title:"Coral",category:"Nature",hint:"Is coral a plant, a rock, or an animal?",wiki:"Coral"},
+{id:"the-history-of-chocolate",title:"The history of chocolate",category:"Food",hint:"How did cacao become chocolate?",wiki:"History_of_chocolate"},
+{id:"the-sound-of-thunder",title:"Thunder and lightning",category:"Earth",hint:"What creates the flash and the sound?",wiki:"Thunder"}
+];
+const randomTopic=()=>topics[Math.random()*topics.length|0];
+
+// timestamp-based countdown: survives background-tab throttling
+function countdown(sec,el,done){
+  const end=Date.now()+sec*1000; let fin=false;
+  const tick=()=>{const left=Math.max(0,Math.ceil((end-Date.now())/1000));
+    el.textContent=fmt(left); if(el===$("l-clock"))document.title=fmt(left)+" · Spin. Learn. Present.";
+    if(left===0&&!fin){fin=true;clearInterval(id);done()}};
+  const id=setInterval(tick,250);tick();return()=>{fin=true;clearInterval(id)};
+}
+
+// ---- 1. spin ----
+function spin(){
+  $("spin").disabled=true;
+  topic=randomTopic();
+  const fillers=shuffle(topics.filter(t=>t.id!==topic.id)).slice(0,38).map(t=>t.title);
+  const items=[...fillers,topic.title,"…"]; // pick sits at index N-2, filler below it
+  const reel=$("reel");
+  reel.innerHTML=items.map((t,i)=>`<div class="${i===items.length-2?"pick":""}">${t.replace(/</g,"&lt;")}</div>`).join("");
+  const target=-(items.length-3)*H, still=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  reel.style.transition="none";reel.style.transform="translateY(0)";reel.offsetHeight;
+  reel.style.transition=still?"none":"transform 4s cubic-bezier(.1,.7,.15,1)";
+  reel.style.transform=`translateY(${target}px)`;
+  setTimeout(()=>{openLearn();$("spin").disabled=false},still?300:4600);
+}
+$("spin").onclick=spin;
+
+// ---- 2. learn ----
+function openLearn(){
+  $("l-cat").textContent=topic.category;$("l-title").textContent=topic.title;$("l-hint").textContent=topic.hint;
+  $("start").hidden=false;$("respin").hidden=false;$("l-run").hidden=true;$("notes").value="";
+  show("s-learn");
+}
+$("respin").onclick=()=>{show("s-spin");spin()};
+let stopLearn=()=>{};
+$("start").onclick=async()=>{
+  $("start").hidden=true;$("respin").hidden=true;$("l-run").hidden=false;
+  stopLearn=countdown(LEARN,$("l-clock"),()=>{new Audio("data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=").play().catch(()=>{});$("l-clock").textContent="Time's up";document.title="Time's up";});
+  try{
+    const s=await (await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(topic.wiki)}`)).json();
+    const url=`https://en.wikipedia.org/wiki/${encodeURIComponent(topic.wiki)}`;
+    $("l-wiki").innerHTML=s.extract?`<p>${s.extract.replace(/</g,"&lt;")}</p><a href="${url}" target="_blank" rel="noopener">Read the full article</a>`:"<p>No quick summary found. Use the links below.</p>";
+    $("l-links").innerHTML=`<a href="https://en.wikipedia.org/w/index.php?search=${encodeURIComponent(topic.title)}" target="_blank" rel="noopener">Search Wikipedia</a><a href="https://www.youtube.com/results?search_query=${encodeURIComponent(topic.title)}" target="_blank" rel="noopener">Watch videos</a>`;
+  }catch{$("l-wiki").innerHTML="<p>Couldn't load reading. Search for the topic yourself.</p>"}
+};
+$("to-present").onclick=()=>{stopLearn();document.title="Spin. Learn. Present.";
+  $("p-title").textContent=topic.title;$("notes-view").textContent=$("notes").value||"(no notes)";
+  $("p-clock").textContent=fmt(TALK);$("p-err").textContent="";
+  $("cam-on").hidden=false;$("rec").hidden=true;$("stop").hidden=true;show("s-present")};
+
+// ---- 3. present ----
+$("cam-on").onclick=async()=>{
+  try{
+    stream=await navigator.mediaDevices.getUserMedia({video:{width:{ideal:1280},height:{ideal:720}},audio:true});
+    $("cam").srcObject=stream;$("cam-on").hidden=true;$("rec").hidden=false;$("p-err").textContent="";
+  }catch(e){$("p-err").textContent="Camera or microphone blocked. Allow access in your browser's site settings, then try again."}
+};
+$("rec").onclick=()=>{
+  const mime=["video/webm;codecs=vp9,opus","video/webm;codecs=vp8,opus","video/webm","video/mp4"].find(m=>MediaRecorder.isTypeSupported(m))||"";
+  rec=new MediaRecorder(stream,{...(mime&&{mimeType:mime}),videoBitsPerSecond:1500000});
+  chunks=[];rec.ondataavailable=e=>e.data.size&&chunks.push(e.data);
+  rec.onstop=()=>{
+    const type=rec.mimeType||"video/webm";
+    const blob=new Blob(chunks,{type});if(blobUrl)URL.revokeObjectURL(blobUrl);blobUrl=URL.createObjectURL(blob);
+    $("playback").src=blobUrl;$("save").href=blobUrl;
+    $("save").download=topic.title.replace(/[^\w]+/g,"-").toLowerCase()+"."+(type.includes("mp4")?"mp4":"webm");
+    stream.getTracks().forEach(t=>t.stop());show("s-done");
+  };
+  rec.start(1000);$("rec").hidden=true;$("stop").hidden=false;
+  stopTalk=countdown(TALK,$("p-clock"),()=>rec.state!=="inactive"&&rec.stop());
+};
+let stopTalk=()=>{};
+$("stop").onclick=()=>{stopTalk();rec.state!=="inactive"&&rec.stop()};
+$("skip").onclick=()=>{$("playback").removeAttribute("src");if(blobUrl)URL.revokeObjectURL(blobUrl);blobUrl=null;show("s-spin")};
+</script></body></html>

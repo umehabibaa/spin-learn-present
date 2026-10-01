@@ -1,7 +1,6 @@
 # Spin. Learn. Present.
 
-A small web app for learning something new and practicing how you explain it. It is live at https://spin-learn-present.vercel.app/
-
+A small web app for learning something new and practicing how you explain it.
 1. **Spin** a slot-machine reel that lands on a random topic (Mandela effect, placebo effect, the Fermi paradox, and about 300 more).
 2. **Learn** for 15 minutes, with a starter summary, search links, and a notes box.
 3. **Present** to your camera for up to 5 minutes.
@@ -17,10 +16,10 @@ Video is recorded in the browser with the `MediaRecorder` API and never reaches 
 | Frontend | Plain HTML, CSS, vanilla JS | Camera and recording only exist in the browser |
 | Container | Docker (`python:3.12-slim`) | One image runs locally and in production |
 | Tests | pytest | Covers topic parsing and the API |
-| Hosting | Render (free web service) | Runs Docker images, free tier available |
+| Hosting | Vercel | Runs Docker images, free tier available |
 
 ## Why Was It Built
-This website was made for people who love learning and want to learn something new everyday. The camera feature was added because:
+This website was made for people who love learning and want to learn something new every day. The camera feature was added because:
 - It is adviced to talk in front of the mirror to practice your speaking proficiency.
 - 5 minute timer can help people practice summarizing their learnings.
 - It can help people actually talk about their research instead of saving it somewhere which can help them remember what they learned.

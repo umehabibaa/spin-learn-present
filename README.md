@@ -66,25 +66,6 @@ Open http://localhost:8000. Camera access works on `localhost` without HTTPS. Th
 
     pytest
 
-## Deploy free on Render
-
-Hugging Face Docker Spaces now require a PRO subscription for new accounts, so this project deploys on Render. Free-tier terms change, so check Render's current pricing page first.
-
-1. Push this folder to a GitHub repo.
-2. On Render: **New → Web Service**, connect the repo.
-3. Language: **Docker**. Instance type: **Free**.
-4. Set **Health Check Path** to `/health`.
-5. Deploy, then open the `onrender.com` URL.
-6. Test on your phone. Camera access needs HTTPS, which Render provides.
-
-No code changes are needed, because the Dockerfile already reads the `PORT` variable that Render sets.
-
-### The cold-start caveat
-
-Free Render web services spin down after 15 minutes without traffic and take about a minute to wake. If you share the link publicly:
-
-- Say in the post that the first load can take about a minute.
-- Optional: ping `/health` every 14 minutes with UptimeRobot or a scheduled GitHub Action. This is a community workaround, not an officially supported feature.
 
 ## Editing topics
 
@@ -100,7 +81,6 @@ Open `app/topics.txt`. A line is either a category header or a topic:
 
 ## Known limitations
 
-- The Wikipedia lookup takes the top search hit, so some topics get a loosely related summary or none. The search links are the fallback.
 - Notes and timers live only in the page. Refreshing the tab loses them.
 - Chrome records WebM and Safari records MP4. The code picks a supported format automatically, but Safari and mobile browsers are untested.
 - Videos are recorded at 1.5 Mbps, so a full 5-minute clip is roughly 55 MB.
@@ -108,6 +88,6 @@ Open `app/topics.txt`. A line is either a category header or a topic:
 ## Ideas for later
 
 - GitHub Actions workflow that runs `pytest` on every push.
-- Filler-word counting with the Web Speech API (Chrome only) and a "your talk" summary at the end.
+- LLM based scoring for the topic explanation for speech enhancement.
 - Category filter before spinning.
-- A "history" of topics you've already done, stored in `localStorage`.
+- A "history" of topics the user has already done, stored in `localStorage`.

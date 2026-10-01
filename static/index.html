@@ -6,6 +6,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&display=swap" rel="stylesheet">
 <style>
+  body::before {
+  content: "";
+  position: fixed;
+  inset: 12px;
+  border: 2px dashed oklch(0.68 0.105 9);
+  border-radius: 12px;
+  pointer-events: none;
+  padding: 4px;
+  z-index: 9999;
+}
+
 :root{
   --bg:oklch(0.978 0.017 95);          /* cream */
   --ink:oklch(0.30 0.055 145);         /* dark matcha */
@@ -20,6 +31,15 @@
   --card:oklch(0.995 0.009 89);
   --shadow:0 8px 26px -16px oklch(0.30 0.055 145 / 24%);
 }
+#s-learn {
+  border: 2px dashed oklch(0.43 0.027 142);
+  border-radius: 16px;
+  padding: 30px;
+}
+#s-learn.no-border {
+  border: none;
+}
+
 @media(prefers-color-scheme:dark){
   :root{
     --bg:oklch(0.23 0.033 145);
@@ -37,6 +57,7 @@
   }
 }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 "Bricolage Grotesque",system-ui,sans-serif}
 main{max-width:720px;margin:0 auto;padding:40px 20px 80px}
 h1{font-size:clamp(2rem,6vw,3.2rem);line-height:1.05;margin:0 0 8px;font-weight:800;letter-spacing:-.02em}
@@ -73,25 +94,31 @@ video{width:100%;border-radius:8px;background:var(--ink);transform:scaleX(-1)}
 .links a{margin-right:16px;color:var(--matcha);text-underline-offset:3px}
 .links a:hover{color:var(--strawberry-deep)}
 .err{color:var(--strawberry-deep);font-weight:700}
+.recbadge{display:inline-flex;align-items:center;gap:10px;margin-top:14px;font-weight:800;color:var(--strawberry-deep);letter-spacing:.08em;text-transform:uppercase}
+.recbadge::before{content:"";width:14px;height:14px;border-radius:50%;background:var(--strawberry-deep);animation:blink 1s infinite}
+@keyframes blink{50%{opacity:.15}}
 h2{margin:0 0 4px;font-size:clamp(1.5rem,5vw,2.2rem);line-height:1.15;font-weight:700}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}}
 </style></head><body><main>
 
 <section id="s-spin" class="on">
-  <h1>Spin. Learn. Present.</h1>
-  <p class="sub">Get a random topic. Spend 15 minutes learning it, then explain it to your camera for 5. The video never leaves your device.</p>
+  <h1>Spin & Tell</h1>
+  <p class="sub">Get a random topic. Spend 15 minutes learning it, then explain it to your camera for 5. Happy learning!!🍓</p>
   <div class="win" aria-live="polite"><div class="reel" id="reel"></div></div>
   <div class="row"><button id="spin">Spin for a topic</button></div>
+  <p class="err" id="s-err"></p>
 </section>
 
 <section id="s-learn">
   <span class="chip" id="l-cat"></span>
   <h2 id="l-title"></h2>
-  <p class="sub" id="l-hint"></p>
-  <div class="row" style="margin-top:0"><button id="start">Start 15-minute timer</button><button class="alt" id="respin">Pick another</button></div>
+  <p style="margin-top: 30px;" class="sub" id="l-hint"></p>
+  <div class="row" style="margin-top:20px"><button id="start">Start!!</button><button class="alt" id="respin">Pick another</button></div>
+  <p id="timer-hint" style="margin-top: 30px;">
+    Click on start button to begin a 15-minute timer🍓<br>
+    and if you're not brave enough for this topic, you can always pick another one ;p</p>
   <div id="l-run" hidden>
     <div class="clock" id="l-clock">15:00</div>
-    <div class="card" id="l-wiki"><p>Loading starter reading…</p></div>
     <div class="links" id="l-links"></div>
     <p><strong>Your notes</strong></p>
     <textarea id="notes" placeholder="Write what you learn. You can glance at these while presenting."></textarea>
@@ -103,7 +130,8 @@ h2{margin:0 0 4px;font-size:clamp(1.5rem,5vw,2.2rem);line-height:1.15;font-weigh
   <h2 id="p-title"></h2>
   <p class="sub">Explain it like you're teaching a friend. Recording stops itself at 5:00.</p>
   <video id="cam" autoplay muted playsinline></video>
-  <div class="clock" id="p-clock" style="margin-top:14px">5:00</div>
+  <div class="recbadge" id="badge" hidden>Recording</div>
+  <div class="clock" id="p-clock" style="margin-top:6px">5:00</div>
   <p class="err" id="p-err"></p>
   <div class="row">
     <button id="cam-on">Open camera</button>
@@ -130,49 +158,13 @@ const show=id=>{document.querySelectorAll("section").forEach(s=>s.classList.togg
 const fmt=s=>`${Math.floor(s/60)}:${String(s%60).padStart(2,"0")}`;
 const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
 
-// ---- topics (all on-device; nothing is fetched from a server) ----
-const topics=[
-{id:"bioluminescence",title:"Bioluminescence",category:"Nature",hint:"How do living things make their own light?",wiki:"Bioluminescence"},
-{id:"the-butterfly-effect",title:"The butterfly effect",category:"Science",hint:"Can a tiny change really alter a much larger outcome?",wiki:"Butterfly_effect"},
-{id:"the-silk-road",title:"The Silk Road",category:"History",hint:"What traveled along these routes besides silk?",wiki:"Silk_Road"},
-{id:"octopus-intelligence",title:"Octopus intelligence",category:"Nature",hint:"How do octopuses solve problems?",wiki:"Cephalopod_intelligence"},
-{id:"the-northern-lights",title:"The northern lights",category:"Space",hint:"What makes the night sky glow?",wiki:"Aurora"},
-{id:"origami",title:"Origami",category:"Art",hint:"How can folding paper inspire engineering?",wiki:"Origami"},
-{id:"the-placebo-effect",title:"The placebo effect",category:"Mind",hint:"Can belief change how we feel?",wiki:"Placebo"},
-{id:"mycelium",title:"Mycelium",category:"Nature",hint:"What connects life beneath the forest floor?",wiki:"Mycelium"},
-{id:"the-james-webb-telescope",title:"The James Webb Space Telescope",category:"Space",hint:"How does it look back in time?",wiki:"James_Webb_Space_Telescope"},
-{id:"fermentation",title:"Fermentation",category:"Food",hint:"Why have people used microbes to make food for centuries?",wiki:"Fermentation"},
-{id:"the-antikythera-mechanism",title:"The Antikythera mechanism",category:"History",hint:"What could this ancient device calculate?",wiki:"Antikythera_mechanism"},
-{id:"tardigrades",title:"Tardigrades",category:"Nature",hint:"How do these tiny animals survive extremes?",wiki:"Tardigrade"},
-{id:"the-great-barrier-reef",title:"The Great Barrier Reef",category:"Nature",hint:"What makes a reef an ecosystem?",wiki:"Great_Barrier_Reef"},
-{id:"synesthesia",title:"Synesthesia",category:"Mind",hint:"What does it mean to taste a word or see a sound?",wiki:"Synesthesia"},
-{id:"the-printing-press",title:"The printing press",category:"History",hint:"How did printed books change who could share ideas?",wiki:"Printing_press"},
-{id:"black-holes",title:"Black holes",category:"Space",hint:"What happens when gravity becomes inescapable?",wiki:"Black_hole"},
-{id:"bees-and-pollination",title:"Bees and pollination",category:"Nature",hint:"How do bees help plants reproduce?",wiki:"Pollination"},
-{id:"the-fibonacci-sequence",title:"The Fibonacci sequence",category:"Math",hint:"Where do these numbers appear in nature?",wiki:"Fibonacci_sequence"},
-{id:"the-moon-landing",title:"The Moon landing",category:"History",hint:"What did it take to get people to the Moon?",wiki:"Apollo_11"},
-{id:"the-water-cycle",title:"The water cycle",category:"Earth",hint:"How does the same water move around our planet?",wiki:"Water_cycle"},
-{id:"the-deep-sea",title:"The deep sea",category:"Nature",hint:"What lives where sunlight cannot reach?",wiki:"Deep_sea"},
-{id:"memory",title:"How memory works",category:"Mind",hint:"Why do some moments stay with us?",wiki:"Memory"},
-{id:"volcanoes",title:"Volcanoes",category:"Earth",hint:"What is happening beneath an eruption?",wiki:"Volcano"},
-{id:"the-internet",title:"How the internet works",category:"Technology",hint:"How does a message reach another continent?",wiki:"Internet"},
-{id:"the-power-of-music",title:"Music and the brain",category:"Mind",hint:"Why does music move us?",wiki:"Music_and_the_brain"},
-{id:"the-migration-of-birds",title:"Bird migration",category:"Nature",hint:"How do birds navigate across the world?",wiki:"Bird_migration"},
-{id:"the-history-of-tea",title:"The history of tea",category:"Food",hint:"How did tea become a global ritual?",wiki:"History_of_tea"},
-{id:"the-tides",title:"Ocean tides",category:"Earth",hint:"How does the Moon move the ocean?",wiki:"Tide"},
-{id:"the-rossetta-stone",title:"The Rosetta Stone",category:"History",hint:"How did one stone unlock an ancient language?",wiki:"Rosetta_Stone"},
-{id:"solar-eclipses",title:"Solar eclipses",category:"Space",hint:"What happens when the Moon blocks the Sun?",wiki:"Solar_eclipse"},
-{id:"the-panda",title:"Giant pandas",category:"Nature",hint:"Why do these bears mostly eat bamboo?",wiki:"Giant_panda"},
-{id:"the-piano",title:"How a piano works",category:"Music",hint:"What happens when you press a key?",wiki:"Piano"},
-{id:"sleep",title:"Why we sleep",category:"Mind",hint:"What does the brain do while we rest?",wiki:"Sleep"},
-{id:"the-compass",title:"The compass",category:"History",hint:"How did a needle transform navigation?",wiki:"Compass"},
-{id:"clouds",title:"How clouds form",category:"Earth",hint:"Why does water gather in the sky?",wiki:"Cloud"},
-{id:"the-art-of-kintsugi",title:"Kintsugi",category:"Art",hint:"Why repair broken pottery with gold?",wiki:"Kintsugi"},
-{id:"the-dna-double-helix",title:"The DNA double helix",category:"Science",hint:"How does DNA carry information?",wiki:"DNA"},
-{id:"coral",title:"Coral",category:"Nature",hint:"Is coral a plant, a rock, or an animal?",wiki:"Coral"},
-{id:"the-history-of-chocolate",title:"The history of chocolate",category:"Food",hint:"How did cacao become chocolate?",wiki:"History_of_chocolate"},
-{id:"the-sound-of-thunder",title:"Thunder and lightning",category:"Earth",hint:"What creates the flash and the sound?",wiki:"Thunder"}
-];
+// ---- topics: loaded once from the FastAPI backend (app/topics.txt) ----
+let topics=[];
+async function loadTopics(){
+  if(topics.length)return;
+  const r=await fetch("/api/topics");if(!r.ok)throw new Error(r.status);
+  topics=await r.json();
+}
 const randomTopic=()=>topics[Math.random()*topics.length|0];
 
 // timestamp-based countdown: survives background-tab throttling
@@ -185,8 +177,9 @@ function countdown(sec,el,done){
 }
 
 // ---- 1. spin ----
-function spin(){
-  $("spin").disabled=true;
+async function spin(){
+  $("spin").disabled=true;$("s-err").textContent="";
+  try{await loadTopics()}catch{$("s-err").textContent="Couldn't load topics. Check your connection and try again.";$("spin").disabled=false;return}
   topic=randomTopic();
   const fillers=shuffle(topics.filter(t=>t.id!==topic.id)).slice(0,38).map(t=>t.title);
   const items=[...fillers,topic.title,"…"]; // pick sits at index N-2, filler below it
@@ -202,25 +195,39 @@ $("spin").onclick=spin;
 
 // ---- 2. learn ----
 function openLearn(){
-  $("l-cat").textContent=topic.category;$("l-title").textContent=topic.title;$("l-hint").textContent=topic.hint;
+  $("l-cat").textContent=topic.category;$("l-title").textContent=topic.title;$("l-hint").textContent=topic.hint;$("l-hint").hidden=!topic.hint;
   $("start").hidden=false;$("respin").hidden=false;$("l-run").hidden=true;$("notes").value="";
   show("s-learn");
 }
-$("respin").onclick=()=>{show("s-spin");spin()};
+$("respin").onclick=()=>{
+  document.getElementById("s-learn").classList.add("no-border");
+  show("s-spin");spin()};
 let stopLearn=()=>{};
-$("start").onclick=async()=>{
+$("start").onclick=()=>{
+  document.getElementById("s-learn").classList.add("no-border");
+  document.getElementById("timer-hint").style.display = "none";
   $("start").hidden=true;$("respin").hidden=true;$("l-run").hidden=false;
-  stopLearn=countdown(LEARN,$("l-clock"),()=>{new Audio("data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=").play().catch(()=>{});$("l-clock").textContent="Time's up";document.title="Time's up";});
-  try{
-    const s=await (await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(topic.wiki)}`)).json();
-    const url=`https://en.wikipedia.org/wiki/${encodeURIComponent(topic.wiki)}`;
-    $("l-wiki").innerHTML=s.extract?`<p>${s.extract.replace(/</g,"&lt;")}</p><a href="${url}" target="_blank" rel="noopener">Read the full article</a>`:"<p>No quick summary found. Use the links below.</p>";
-    $("l-links").innerHTML=`<a href="https://en.wikipedia.org/w/index.php?search=${encodeURIComponent(topic.title)}" target="_blank" rel="noopener">Search Wikipedia</a><a href="https://www.youtube.com/results?search_query=${encodeURIComponent(topic.title)}" target="_blank" rel="noopener">Watch videos</a>`;
-  }catch{$("l-wiki").innerHTML="<p>Couldn't load reading. Search for the topic yourself.</p>"}
+  stopLearn=countdown(LEARN,$("l-clock"),()=>{
+  const AudioCtx=window.AudioContext||window.webkitAudioContext;
+  if(AudioCtx){
+    const ctx=new AudioCtx(),now=ctx.currentTime;
+    [0,0.7,1.4,2.1,2.8].forEach((delay,i)=>{
+      const osc=ctx.createOscillator(),gain=ctx.createGain();
+      osc.type="square";osc.frequency.value=i%2?880:660;
+      gain.gain.setValueAtTime(.18,now+delay);
+      gain.gain.exponentialRampToValueAtTime(.001,now+delay+.45);
+      osc.connect(gain);gain.connect(ctx.destination);
+      osc.start(now+delay);osc.stop(now+delay+.45);
+    });
+  }
+  $("l-clock").textContent="Time's up";document.title="Time's up";
+});
+  const q=encodeURIComponent(topic.title);
+  $("l-links").innerHTML=[["Wikipedia",`https://en.wikipedia.org/w/index.php?search=${q}`],["YouTube",`https://www.youtube.com/results?search_query=${q}`],["Google",`https://www.google.com/search?q=${q}`]].map(([n,u])=>`<a href="${u}" target="_blank" rel="noopener">${n}</a>`).join("");
 };
 $("to-present").onclick=()=>{stopLearn();document.title="Spin. Learn. Present.";
   $("p-title").textContent=topic.title;$("notes-view").textContent=$("notes").value||"(no notes)";
-  $("p-clock").textContent=fmt(TALK);$("p-err").textContent="";
+  rec=null;$("badge").hidden=true;$("p-clock").textContent=fmt(TALK);$("p-err").textContent="";
   $("cam-on").hidden=false;$("rec").hidden=true;$("stop").hidden=true;show("s-present")};
 
 // ---- 3. present ----
@@ -231,6 +238,8 @@ $("cam-on").onclick=async()=>{
   }catch(e){$("p-err").textContent="Camera or microphone blocked. Allow access in your browser's site settings, then try again."}
 };
 $("rec").onclick=()=>{
+  if(rec&&rec.state==="recording")return; // ignore double clicks
+  stopTalk();
   const mime=["video/webm;codecs=vp9,opus","video/webm;codecs=vp8,opus","video/webm","video/mp4"].find(m=>MediaRecorder.isTypeSupported(m))||"";
   rec=new MediaRecorder(stream,{...(mime&&{mimeType:mime}),videoBitsPerSecond:1500000});
   chunks=[];rec.ondataavailable=e=>e.data.size&&chunks.push(e.data);
@@ -239,9 +248,9 @@ $("rec").onclick=()=>{
     const blob=new Blob(chunks,{type});if(blobUrl)URL.revokeObjectURL(blobUrl);blobUrl=URL.createObjectURL(blob);
     $("playback").src=blobUrl;$("save").href=blobUrl;
     $("save").download=topic.title.replace(/[^\w]+/g,"-").toLowerCase()+"."+(type.includes("mp4")?"mp4":"webm");
-    stream.getTracks().forEach(t=>t.stop());show("s-done");
+    stream.getTracks().forEach(t=>t.stop());$("badge").hidden=true;show("s-done");
   };
-  rec.start(1000);$("rec").hidden=true;$("stop").hidden=false;
+  rec.start(1000);$("rec").hidden=true;$("stop").hidden=false;$("badge").hidden=false;
   stopTalk=countdown(TALK,$("p-clock"),()=>rec.state!=="inactive"&&rec.stop());
 };
 let stopTalk=()=>{};

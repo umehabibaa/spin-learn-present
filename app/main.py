@@ -9,7 +9,8 @@ from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
-BASE = Path(__file__).parent
+# resolve() keeps paths absolute, which matters inside Vercel's function bundle
+BASE = Path(__file__).resolve().parent
 STATIC = BASE.parent / "static"
 
 CATEGORIES = [
@@ -99,7 +100,7 @@ def summary(topic_id: int):
     }
 
 
-@app.get("/")
+@app.get("/", include_in_schema=False)
 def index():
     return FileResponse(STATIC / "index.html")
 
